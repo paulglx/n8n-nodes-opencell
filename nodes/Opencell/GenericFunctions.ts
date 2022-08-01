@@ -35,7 +35,8 @@ export async function opencellApi(this: IHookFunctions | IWebhookFunctions | IEx
 
 	try {
 		const authenticationMethod = this.getNodeParameter('authentication', 0);
-		let responseData: any;//@ts-ignore:no-any
+		// @ts-ignore
+		let responseData:IDataObject = {};
 
 		if(authenticationMethod === 'basicAuth') {
 			const httpBasicAuth = await this.getCredentials('opencellApi');
@@ -53,8 +54,8 @@ export async function opencellApi(this: IHookFunctions | IWebhookFunctions | IEx
 		}
 
 		// To return an array when it is a generic API get list
-		if ('POST' === method && responseData['data'] && responseData['data'].length != null) {
-			returnData.push.apply(returnData, responseData['data']);
+		if ('POST' === method && responseData.data) {
+			returnData.push.apply(returnData, responseData.data as IDataObject[]);
 			return returnData;
 		}
 		return responseData;
