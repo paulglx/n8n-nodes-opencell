@@ -126,10 +126,6 @@ export class Opencell implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
-						name: 'Contact',
-						value: 'contact',
-					},
-					{
 						name: 'Customer Hierarchy',
 						value: 'customerHierarchy',
 					},
@@ -380,13 +376,7 @@ export class Opencell implements INodeType {
 			try {
 				// Add credentials if any are set
 				// here we use basic auth
-
-				if (resource === 'contact') {
-					if (operation === 'create') {
-
-					}
-				}
-				else if (resource === 'customerHierarchy') {
+				if (resource === 'customerHierarchy') {
 					if (operation === 'upsert') {
 
 						const url = `/opencell/api/rest/account/accountHierarchy/createOrUpdateCRMAccountHierarchy`;
@@ -620,7 +610,10 @@ export class Opencell implements INodeType {
 						};
 
 						responseData = await opencellApi.call(this, 'POST', url, body);
-						returnData.push(responseData);
+						returnData.push({
+							json:responseData,
+							pairedItem: {item:i},
+						});
 					}
 				}
 				else if (resource === 'subscription') {
@@ -745,8 +738,12 @@ export class Opencell implements INodeType {
 					}
 
 					responseData = await opencellApi.call(this, verb, url, body);
-					returnData.push(responseData);
+					returnData.push({
+						json:responseData,
+						pairedItem: {item:i},
+					});
 
+					//Activate subscription if needed
 					if(['create','update'].includes(operation) && this.getNodeParameter('activate',i)){
 						const activateVerb = 'PUT';
 						const activateUrl = '/opencell/api/rest/billing/subscription/activate';
@@ -754,7 +751,10 @@ export class Opencell implements INodeType {
 							'subscriptionCode':this.getNodeParameter('code', i),
 						};
 						const activateResponseData = await opencellApi.call(this, activateVerb, activateUrl, activateBody);
-						returnData.push(activateResponseData);
+						returnData.push({
+							json:activateResponseData,
+							pairedItem: {item:i},
+						});
 						
 					}
 				}
@@ -773,7 +773,10 @@ export class Opencell implements INodeType {
 							body.nestedEntities = nestedEntities;
 						}
 						responseData = await opencellApi.call(this, 'POST', url, body);
-						returnData.push(responseData);
+						returnData.push({
+							json:responseData,
+							pairedItem: {item:i},
+						});
 					}
 					else if (operation === 'search') {
 						const entity = this.getNodeParameter('entity', i) as string;
@@ -796,7 +799,10 @@ export class Opencell implements INodeType {
 							}
 						}
 						responseData = await opencellApi.call(this, 'POST', url, body);
-						returnData.push(responseData);
+						returnData.push({
+							json:responseData,
+							pairedItem: {item:i},
+						});
 					}
 				}
 			} catch (error) {
