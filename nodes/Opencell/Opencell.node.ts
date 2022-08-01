@@ -781,16 +781,11 @@ export class Opencell implements INodeType {
 
 					else if (operation === 'getAll') {
 						const entity = this.getNodeParameter('entity', i) as string;
-						const entiyId = this.getNodeParameter('id', i) as number;
-						const url = `/opencell/api/rest/v2/generic/${entity}/${entiyId}`;
+						const url = `/opencell/api/rest/v2/generic/all/${entity}`;
 
 						// Update body if nested entities are set
-						const nestedEntities = this.getNodeParameter('nestedEntities', i) as string[];
 						const body: IDataObject = {};
-						body.limit = 100;
-						if (nestedEntities.length > 0) {
-							body.nestedEntities = nestedEntities;
-						}
+						body.limit = 250;
 						responseData = await opencellApi.call(this, 'POST', url, body);
 						returnData.push({
 							json:responseData,
