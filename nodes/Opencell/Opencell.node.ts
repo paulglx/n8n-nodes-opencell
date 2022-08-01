@@ -376,12 +376,6 @@ export class Opencell implements INodeType {
 			try {
 				// Add credentials if any are set
 				// here we use basic auth
-
-				if (resource === 'contact') {
-					if (operation === 'create') {
-
-					}
-				}
 				else if (resource === 'customerHierarchy') {
 					if (operation === 'upsert') {
 
