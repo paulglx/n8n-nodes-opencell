@@ -202,7 +202,7 @@ export class Opencell implements INodeType {
 							value: `${product.code}`,
 						});
 					}
-				return returnData.sort((a, b) => a.name < b.name ? 0 : 1);
+				return returnData.sort((a,b) => (a.name>b.name)? 1 : -1);
 			},
 
 			async getCustomFields(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
@@ -241,7 +241,7 @@ export class Opencell implements INodeType {
 							value: `${cf.code}|${cf.fieldType}${listValues}`,
 						});
 					}
-					return returnData.sort((a, b) => a.name < b.name ? 0 : 1);
+					return returnData.sort((a,b) => (a.name>b.name)? 1 : -1);
 				}
 				else {
 					throw new NodeApiError(this.getNode(),{error:'Unable to get custom fields.\nServer response:'+customFields});
@@ -269,7 +269,7 @@ export class Opencell implements INodeType {
 							value: `${value}`,
 						});
 					}
-					return returnData.sort((a, b) => a.name < b.name ? 0 : 1);
+					return returnData.sort((a,b) => (a.name>b.name)? 1 : -1);
 				}
 				else {
 					throw new NodeApiError(this.getNode(),{error:'Custom fields have not been fetched yet.'});
@@ -290,7 +290,7 @@ export class Opencell implements INodeType {
 						value: title.code,
 					});
 				}
-				return returnData.sort((a, b) => a.name < b.name ? 0 : 1);
+				return returnData.sort((a,b) => (a.name>b.name)? 1 : -1);
 			},
 			
 			async getEntities(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
@@ -304,7 +304,7 @@ export class Opencell implements INodeType {
 						value: entity,
 					});
 				}
-				return returnData.sort((a, b) => a.name < b.name ? 0 : 1);
+				return returnData.sort((a,b) => (a.name>b.name)? 1 : -1);
 			},
 			async getNestedEntities(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
 				const returnData: INodePropertyOptions[] = [];
@@ -327,7 +327,7 @@ export class Opencell implements INodeType {
 				// 		value: entity,
 				// 	});
 				// }
-				return returnData.sort((a, b) => a < b ? 0 : 1);
+				return returnData.sort((a,b) => (a.name>b.name)? 1 : -1);
 			},
 			async getUserAccounts(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
 				const returnData: INodePropertyOptions[] = [];
@@ -341,7 +341,7 @@ export class Opencell implements INodeType {
 						value: userAccount.code,
 					});
 				}
-				return returnData.sort((a, b) => a.name < b.name ? 0 : 1);
+				return returnData.sort((a,b) => (a.name>b.name)? 1 : -1);
 			},
 			async getOfferTemplates(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
 				const returnData: INodePropertyOptions[] = [];
@@ -355,7 +355,7 @@ export class Opencell implements INodeType {
 						value: offerTemplate.code,
 					});
 				}
-				return returnData.sort((a, b) => a.name < b.name ? 0 : 1);
+				return returnData.sort((a,b) => (a.name>b.name)? 1 : -1);
 			},
 		},
 	};
@@ -778,6 +778,26 @@ export class Opencell implements INodeType {
 							pairedItem: {item:i},
 						});
 					}
+
+					else if (operation === 'getAll') {
+						const entity = this.getNodeParameter('entity', i) as string;
+						const entiyId = this.getNodeParameter('id', i) as number;
+						const url = `/opencell/api/rest/v2/generic/${entity}/${entiyId}`;
+
+						// Update body if nested entities are set
+						const nestedEntities = this.getNodeParameter('nestedEntities', i) as string[];
+						const body: IDataObject = {};
+						body.limit = 100;
+						if (nestedEntities.length > 0) {
+							body.nestedEntities = nestedEntities;
+						}
+						responseData = await opencellApi.call(this, 'POST', url, body);
+						returnData.push({
+							json:responseData,
+							pairedItem: {item:i},
+						});
+					}
+
 					else if (operation === 'search') {
 						const entity = this.getNodeParameter('entity', i) as string;
 						const url = `/opencell/api/rest/v2/generic/all/${entity}`;
