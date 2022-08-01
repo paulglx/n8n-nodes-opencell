@@ -21,6 +21,7 @@ import {
 
 import {
 	opencellApi,
+	opencellApiRequestAll,
 } from './GenericFunctions';
 
 import {
@@ -786,7 +787,7 @@ export class Opencell implements INodeType {
 						// Update body if nested entities are set
 						const body: IDataObject = {};
 						body.limit = 250;
-						responseData = await opencellApi.call(this, 'POST', url, body);
+						responseData = await opencellApiRequestAll.call(this, 'POST', url, body);
 						returnData.push({
 							json:responseData,
 							pairedItem: {item:i},
