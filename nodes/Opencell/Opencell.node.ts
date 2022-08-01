@@ -126,10 +126,6 @@ export class Opencell implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
-						name: 'Contact',
-						value: 'contact',
-					},
-					{
 						name: 'Customer Hierarchy',
 						value: 'customerHierarchy',
 					},
