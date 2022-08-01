@@ -1,3 +1,4 @@
+/* eslint-disable n8n-nodes-base/node-param-default-wrong-for-options */
 import {
 	IDataObject,
 	INodeProperties,
@@ -30,7 +31,7 @@ export const customerHierarchyOperations: INodeProperties[] = [
 				name: 'Create or Update',
 				value: 'upsert',
 				description: 'Create a new record, or update the current one if it already exists (upsert)',
-				action: 'Create/Update a customer hierarchy',
+				action: 'Create update a customer hierarchy',
 			},
 			{
 				name: 'Delete',
@@ -38,30 +39,14 @@ export const customerHierarchyOperations: INodeProperties[] = [
 				description: 'Delete a contact',
 				action: 'Delete a customer hierarchy',
 			},
-			{
-				name: 'Get',
-				value: 'get',
-				description: 'Get a contact',
-				action: 'Get a customer hierarchy',
-			},
-			{
-				name: 'Get All',
-				value: 'getAll',
-				description: 'Get all contacts',
-				action: 'Get all customer hierarchies',
-			},
+			/*
 			{
 				name: 'Get Recently Created/Updated',
 				value: 'getRecentlyCreatedUpdated',
 				description: 'Get recently created/updated contacts',
 				action: 'Get Recently Created/Updated a customer hierarchy',
 			},
-			{
-				name: 'Search',
-				value: 'search',
-				description: 'Search contacts',
-				action: 'Search a customer hierarchy',
-			},
+			*/
 		],
 		default: 'upsert',
 	},
@@ -526,1259 +511,542 @@ export const customerHierarchyFields: INodeProperties[] = [
 		options: [
 			// Specific DTOs (auto-generated)
 			{
-				displayName: 'Bank Coordinates',
-				name: 'bankCoordinates',
-				type: 'collection',
-				default: {},
+				default: "ACTIVE",
+				displayName: "BA Status",
+				name: "baStatus",
 				options: [
 					{
-						displayName: 'Account Number',
-						name: 'accountNumber',
-						type: 'string',
-						default: '',
+						name: "Active",
+						"value": "ACTIVE"
 					},
 					{
-						displayName: 'Bank Code',
-						name: 'bankCode',
-						type: 'string',
-						default: '',
+						name: "Canceled",
+						"value": "CANCELED"
 					},
 					{
-						displayName: 'Branch Code',
-						name: 'branchCode',
-						type: 'string',
-						default: '',
+						name: "Closed",
+						"value": "CLOSED"
 					},
 					{
-						displayName: 'Key',
-						name: 'key',
-						type: 'string',
-						default: '',
+						name: "Terminated",
+						"value": "TERMINATED"
+					}
+				],
+				type: "options"
+			},
+			{
+				default: {},
+				displayName: "Bank Coordinates",
+				name: "bankCoordinates",
+				options: [
+					{
+						default: "",
+						displayName: "Account Number",
+						name: "accountNumber",
+						type: "string"
 					},
 					{
-						displayName: 'IBAN',
-						name: 'iban',
-						type: 'string',
-						default: '',
+						default: "",
+						displayName: "Account Owner",
+						name: "accountOwner",
+						type: "string"
 					},
 					{
-						displayName: 'BIC',
-						name: 'bic',
-						type: 'string',
-						default: '',
+						default: "",
+						displayName: "BIC",
+						name: "bic",
+						type: "string"
 					},
 					{
-						displayName: 'Account Owner',
-						name: 'accountOwner',
-						type: 'string',
-						default: '',
+						default: "",
+						displayName: "Bank Code",
+						name: "bankCode",
+						type: "string"
 					},
 					{
-						displayName: 'Bank Name',
-						name: 'bankName',
-						type: 'string',
-						default: '',
+						default: "",
+						displayName: "Bank ID",
+						name: "bankId",
+						type: "string"
 					},
 					{
-						displayName: 'Bank ID',
-						name: 'bankId',
-						type: 'string',
-						default: '',
+						default: "",
+						displayName: "Bank Name",
+						name: "bankName",
+						type: "string"
 					},
 					{
-						displayName: 'Issuer Number',
-						name: 'issuerNumber',
-						type: 'string',
-						default: '',
+						default: "",
+						displayName: "Branch Code",
+						name: "branchCode",
+						type: "string"
 					},
 					{
-						displayName: 'Issuer Name',
-						name: 'issuerName',
-						type: 'string',
-						default: '',
+						default: "",
+						displayName: "IBAN",
+						name: "iban",
+						type: "string"
 					},
 					{
-						displayName: 'ICS',
-						name: 'ics',
-						type: 'string',
-						default: '',
+						default: "",
+						displayName: "ICS",
+						name: "ics",
+						type: "string"
 					},
 					{
-						displayName: 'Empty',
-						name: 'empty',
-						type: 'boolean',
+						default: "",
+						displayName: "Issuer Name",
+						name: "issuerName",
+						type: "string"
+					},
+					{
+						default: "",
+						displayName: "Issuer Number",
+						name: "issuerNumber",
+						type: "string"
+					},
+					{
+						default: "",
+						displayName: "Key",
+						name: "key",
+						type: "string"
+					},
+					{
 						default: false,
-					},
+						displayName: "Empty",
+						name: "empty",
+						type: "boolean"
+					}
 				],
+				type: "collection"
 			},
 			{
-				displayName: 'Minimum Amount',
-				name: 'minimumAmountEl',
-				type: 'collection',
-				default: {},
+				default: "",
+				displayName: "Billing Cycle",
+				name: "billingCycle",
+				type: "string"
+			},
+			{
+				default: "ACTIVE",
+				displayName: "CA Status",
+				name: "caStatus",
 				options: [
 					{
-						displayName: 'Customer Minimum Amount',
-						name: 'customerMinimumAmountEl',
-						type: 'string',
-						default: '',
+						name: "Active",
+						"value": "ACTIVE"
 					},
 					{
-						displayName: 'Customer Minimum Label',
-						name: 'customerMinimumLabelEl',
-						type: 'string',
-						default: '',
-					},
-					{
-						displayName: 'Customer Minimum Target Account',
-						name: 'customerMinimumTargetAccount',
-						type: 'string',
-						default: '',
-					},
-					{
-						displayName: 'Customer Account Minimum Amount',
-						name: 'customerAccountMinimumAmountEl',
-						type: 'string',
-						default: '',
-					},
-					{
-						displayName: 'Customer Account Minimum Label',
-						name: 'customerAccountMinimumLabelEl',
-						type: 'string',
-						default: '',
-					},
-					{
-						displayName: 'Customer Account Minimum Target Account',
-						name: 'customerAccountMinimumTargetAccount',
-						type: 'string',
-						default: '',
-					},
-					{
-						displayName: 'Billing Account Minimum Amount',
-						name: 'billingAccountMinimumAmountEl',
-						type: 'string',
-						default: '',
-					},
-					{
-						displayName: 'Billing Account Minimum Label',
-						name: 'billingAccountMinimumLabelEl',
-						type: 'string',
-						default: '',
-					},
-					{
-						displayName: 'User Account Minimum Amount',
-						name: 'userAccountMinimumAmountEl',
-						type: 'string',
-						default: '',
-					},
-					{
-						displayName: 'User Account Minimum Label',
-						name: 'userAccountMinimumLabelEl',
-						type: 'string',
-						default: '',
-					},
-					{
-						displayName: 'Customer Minimum Charge Template',
-						name: 'customerMinimumChargeTemplate',
-						type: 'string',
-						default: '',
-					},
-					{
-						displayName: 'Customer Account Minimum Charge Template',
-						name: 'customerAccountMinimumChargeTemplate',
-						type: 'string',
-						default: '',
-					},
-					{
-						displayName: 'Billing Account Minimum Charge Template',
-						name: 'billingAccountMinimumChargeTemplate',
-						type: 'string',
-						default: '',
-					},
-					{
-						displayName: 'User Account Minimum Charge Template',
-						name: 'userAccountMinimumChargeTemplate',
-						type: 'string',
-						default: '',
-					},
+						name: "Close",
+						"value": "CLOSE"
+					}
 				],
-			},
-			// Auto generated
-			{
-				displayName: 'Description',
-				name: 'description',
-				type: 'string',
-				default: '',
+				type: "options"
 			},
 			{
-					displayName: 'External Reference 1',
-					name: 'externalRef1',
-					type: 'string',
-					default: '',
+				default: "",
+				displayName: "CCED Emails",
+				name: "ccedEmails",
+				type: "string"
 			},
 			{
-					displayName: 'External Reference 2',
-					name: 'externalRef2',
-					type: 'string',
-					default: '',
+				default: "BEFORE_DISCOUNT",
+				displayName: "Check Threshold",
+				name: "checkThreshold",
+				options: [
+					{
+						name: "After Discount",
+						"value": "AFTER_DISCOUNT"
+					},
+					{
+						name: "Before Discount",
+						"value": "BEFORE_DISCOUNT"
+					},
+					{
+						name: "Positive Invoice Line",
+						"value": "POSITIVE_IL"
+					},
+					{
+						name: "Positive Rated Transaction",
+						"value": "POSITIVE_RT"
+					}
+				],
+				type: "options"
 			},
 			{
-					displayName: 'Job Title',
-					name: 'jobTitle',
-					type: 'string',
-					default: '',
+				default: "BEFORE_DISCOUNT",
+				displayName: "Customer Account Check Threshold",
+				name: "customerAccountCheckThreshold",
+				options: [
+					{
+						name: "After Discount",
+						"value": "AFTER_DISCOUNT"
+					},
+					{
+						name: "Before Discount",
+						"value": "BEFORE_DISCOUNT"
+					},
+					{
+						name: "Positive Invoice Line",
+						"value": "POSITIVE_IL"
+					},
+					{
+						name: "Positive Rated Transaction",
+						"value": "POSITIVE_RT"
+					}
+				],
+				type: "options"
 			},
 			{
-					displayName: 'Termination Reason',
-					name: 'terminationReason',
-					type: 'string',
-					default: '',
+				default: "BEFORE_DISCOUNT",
+				displayName: "Customer Check Threshold",
+				name: "customerCheckThreshold",
+				options: [
+					{
+						name: "After Discount",
+						"value": "AFTER_DISCOUNT"
+					},
+					{
+						name: "Before Discount",
+						"value": "BEFORE_DISCOUNT"
+					},
+					{
+						name: "Positive Invoice Line",
+						"value": "POSITIVE_IL"
+					},
+					{
+						name: "Positive Rated Transaction",
+						"value": "POSITIVE_RT"
+					}
+				],
+				type: "options"
 			},
 			{
-					displayName: 'Subscription Date',
-					name: 'subscriptionDate',
-					type: 'dateTime',
-					default: '',
+				default: false,
+				displayName: "Company",
+				name: "company",
+				type: "boolean"
 			},
 			{
-					displayName: 'Termination Date',
-					name: 'terminationDate',
-					type: 'dateTime',
-					default: '',
+				default: 0,
+				displayName: "Customer Account Invoicing Threshold",
+				name: "customerAccountInvoicingThreshold",
+				type: "number"
 			},
 			{
-					displayName: 'Customer Brand',
-					name: 'customerBrand',
-					type: 'string',
-					default: '',
+				default: false,
+				displayName: "Customer Account Threshold Per Entity",
+				name: "customerAccountThresholdPerEntity",
+				type: "boolean"
 			},
 			{
-					displayName: 'Registration Number',
-					name: 'registrationNo',
-					type: 'string',
-					default: '',
+				default: 0,
+				displayName: "Customer Invoicing Threshold",
+				name: "customerInvoicingThreshold",
+				type: "number"
 			},
 			{
-					displayName: 'VAT Number',
-					name: 'vatNo',
-					type: 'string',
-					default: '',
+				default: "",
+				displayName: "Credit Category",
+				name: "creditCategory",
+				type: "string"
 			},
 			{
-					displayName: 'Seller',
-					name: 'seller',
-					type: 'string',
-					default: '',
+				default: "",
+				displayName: "Customer Brand",
+				name: "customerBrand",
+				type: "string"
 			},
 			{
-					displayName: 'Mandate Identification',
-					name: 'mandateIdentification',
-					type: 'string',
-					default: '',
+				default: false,
+				displayName: "Customer Threshold Per Entity",
+				name: "customerThresholdPerEntity",
+				type: "boolean"
 			},
 			{
-					displayName: 'Mandate Date',
-					name: 'mandateDate',
-					type: 'dateTime',
-					default: '',
+				default: "",
+				displayName: "Date Dunning Level",
+				name: "dateDunningLevel",
+				type: "dateTime"
 			},
 			{
-					displayName: 'CA Status',
-					name: 'caStatus',
-					type: 'options',
-					options: [
-						{
-							name: 'Active',
-							value: 'ACTIVE',
-						},
-						{
-							name: 'Close',
-							value: 'CLOSE',
-						},
-					],
-					default: 'ACTIVE',
+				default: "",
+				displayName: "Date Status",
+				name: "dateStatus",
+				type: "dateTime"
 			},
 			{
-					displayName: 'Credit Category',
-					name: 'creditCategory',
-					type: 'string',
-					default: '',
+				default: "",
+				displayName: "Description",
+				name: "description",
+				type: "string"
 			},
 			{
-					displayName: 'Date Status',
-					name: 'dateStatus',
-					type: 'dateTime',
-					default: '',
+				displayName: "Dunning Level",
+				name: "dunningLevel",
+				options: [
+					{
+						name: "0",
+						"value": "R0"
+					},
+					{
+						name: "1",
+						"value": "R1"
+					},
+					{
+						name: "2",
+						"value": "R2"
+					},
+					{
+						name: "3",
+						"value": "R3"
+					},
+					{
+						name: "4",
+						"value": "R4"
+					},
+					{
+						name: "5",
+						"value": "R5"
+					},
+					{
+						name: "6",
+						"value": "R6"
+					}
+				],
+				type: "options",
+				default: "R0",
 			},
 			{
-					displayName: 'Date Dunning Level',
-					name: 'dateDunningLevel',
-					type: 'dateTime',
-					default: '',
+				default: false,
+				displayName: "Electronic Billing",
+				name: "electronicBilling",
+				type: "boolean"
 			},
 			{
-					displayName: 'Dunning Level',
-					name: 'dunningLevel',
-					type: 'options',
-					options: [
-						{
-							name: '0',
-							value: 'R0',
-						},
-						{
-							name: '1',
-							value: 'R1',
-						},
-						{
-							name: '2',
-							value: 'R2',
-						},
-						{
-							name: '3',
-							value: 'R3',
-						},
-						{
-							name: '4',
-							value: 'R4',
-						},
-						{
-							name: '5',
-							value: 'R5',
-						},
-						{
-							name: '6',
-							value: 'R6',
-						},
-					],
-					default: 'R0',
+				default: "",
+				displayName: "Email Template",
+				name: "emailTemplate",
+				type: "string"
 			},
 			{
-					displayName: 'Payment Terms',
-					name: 'paymentTerms',
-					type: 'string',
-					default: '',
+				default: "",
+				displayName: "External Reference 1",
+				name: "externalRef1",
+				type: "string"
 			},
 			{
-					displayName: 'Billing Cycle',
-					name: 'billingCycle',
-					type: 'string',
-					default: '',
+				default: "",
+				displayName: "External Reference 2",
+				name: "externalRef2",
+				type: "string"
 			},
 			{
-					displayName: 'Next Invoice Date',
-					name: 'nextInvoiceDate',
-					type: 'dateTime',
-					default: '',
+				default: 0,
+				displayName: "Invoicing Threshold",
+				name: "invoicingThreshold",
+				type: "number"
 			},
 			{
-					displayName: 'Electronic Billing',
-					name: 'electronicBilling',
-					type: 'boolean',
-					default: false,
+				default: "",
+				displayName: "Job Title",
+				name: "jobTitle",
+				type: "string"
 			},
 			{
-					displayName: 'BA Status',
-					name: 'baStatus',
-					type: 'options',
-					options: [
-						{
-							name:'Active',
-							value:'ACTIVE',
-						},
-						{
-							name:'Canceled',
-							value:'CANCELED',
-						},
-						{
-							name:'Terminated',
-							value:'TERMINATED',
-						},
-						{
-							name:'Closed',
-							value:'CLOSED',
-						},
-					],
-					default: 'ACTIVE',
+				default: "",
+				displayName: "Mailing Type",
+				name: "mailingType",
+				type: "string"
 			},
 			{
-					displayName: 'Invoicing Threshold',
-					name: 'invoicingThreshold',
-					type: 'number',
-					default: 0,
+				default: "",
+				displayName: "Mandate Date",
+				name: "mandateDate",
+				type: "dateTime"
 			},
 			{
-					displayName: 'UA Status',
-					name: 'uaStatus',
-					type: 'options',
-					options: [
-						{
-							name:'Active',
-							value:'ACTIVE',
-						},
-						{
-							name:'Canceled',
-							value:'CANCELED',
-						},
-						{
-							name:'Terminated',
-							value:'TERMINATED',
-						},
-						{
-							name:'Closed',
-							value:'CLOSED',
-						},
-					],
-					default: 'ACTIVE',
+				default: "",
+				displayName: "Mandate Identification",
+				name: "mandateIdentification",
+				type: "string"
 			},
 			{
-					displayName: 'Mailing Type',
-					name: 'mailingType',
-					type: 'string',
-					default: '',
+				default: {},
+				displayName: "Minimum Amount",
+				name: "minimumAmountEl",
+				options: [
+					{
+						default: "",
+						displayName: "Billing Account Minimum Amount",
+						name: "billingAccountMinimumAmountEl",
+						type: "string"
+					},
+					{
+						default: "",
+						displayName: "Billing Account Minimum Charge Template",
+						name: "billingAccountMinimumChargeTemplate",
+						type: "string"
+					},
+					{
+						default: "",
+						displayName: "Billing Account Minimum Label",
+						name: "billingAccountMinimumLabelEl",
+						type: "string"
+					},
+					{
+						default: "",
+						displayName: "Customer Account Minimum Amount",
+						name: "customerAccountMinimumAmountEl",
+						type: "string"
+					},
+					{
+						default: "",
+						displayName: "Customer Account Minimum Charge Template",
+						name: "customerAccountMinimumChargeTemplate",
+						type: "string"
+					},
+					{
+						default: "",
+						displayName: "Customer Account Minimum Label",
+						name: "customerAccountMinimumLabelEl",
+						type: "string"
+					},
+					{
+						default: "",
+						displayName: "Customer Account Minimum Target Account",
+						name: "customerAccountMinimumTargetAccount",
+						type: "string"
+					},
+					{
+						default: "",
+						displayName: "Customer Minimum Amount",
+						name: "customerMinimumAmountEl",
+						type: "string"
+					},
+					{
+						default: "",
+						displayName: "Customer Minimum Charge Template",
+						name: "customerMinimumChargeTemplate",
+						type: "string"
+					},
+					{
+						default: "",
+						displayName: "Customer Minimum Label",
+						name: "customerMinimumLabelEl",
+						type: "string"
+					},
+					{
+						default: "",
+						displayName: "Customer Minimum Target Account",
+						name: "customerMinimumTargetAccount",
+						type: "string"
+					},
+					{
+						default: "",
+						displayName: "User Account Minimum Amount",
+						name: "userAccountMinimumAmountEl",
+						type: "string"
+					},
+					{
+						default: "",
+						displayName: "User Account Minimum Charge Template",
+						name: "userAccountMinimumChargeTemplate",
+						type: "string"
+					},
+					{
+						default: "",
+						displayName: "User Account Minimum Label",
+						name: "userAccountMinimumLabelEl",
+						type: "string"
+					}
+				],
+				type: "collection"
 			},
 			{
-					displayName: 'Email Template',
-					name: 'emailTemplate',
-					type: 'string',
-					default: '',
+				default: "",
+				displayName: "Next Invoice Date",
+				name: "nextInvoiceDate",
+				type: "dateTime"
 			},
 			{
-					displayName: 'CCED Emails',
-					name: 'ccedEmails',
-					type: 'string',
-					default: '',
+				default: "",
+				displayName: "Payment Terms",
+				name: "paymentTerms",
+				type: "string"
 			},
 			{
-					displayName: 'Customer Invoicing Threshold',
-					name: 'customerInvoicingThreshold',
-					type: 'number',
-					default: 0,
+				default: "",
+				displayName: "Registration Number",
+				name: "registrationNo",
+				type: "string"
 			},
 			{
-					displayName: 'Customer Account Invoicing Threshold',
-					name: 'customerAccountInvoicingThreshold',
-					type: 'number',
-					default: 0,
+				default: "",
+				displayName: "Seller",
+				name: "seller",
+				type: "string"
 			},
 			{
-					displayName: 'Check Threshold',
-					name: 'checkThreshold',
-					type: 'options',
-					options: [
-						{
-							name:'Before Discount',
-							value:'BEFORE_DISCOUNT',
-						},
-						{
-							name:'After Discount',
-							value:'AFTER_DISCOUNT',
-						},
-						{
-							name:'Positive Rated Transaction',
-							value:'POSITIVE_RT',
-						},
-						{
-							name:'Positive Invoice Line',
-							value:'POSITIVE_IL',
-						},
-					],
-					default: 'BEFORE_DISCOUNT',
+				default: "",
+				displayName: "Subscription Date",
+				name: "subscriptionDate",
+				type: "dateTime"
 			},
 			{
-					displayName: 'Customer Account Check Threshold',
-					name: 'customerAccountCheckThreshold',
-					type: 'options',
-					options: [
-						{
-							name:'Before Discount',
-							value:'BEFORE_DISCOUNT',
-						},
-						{
-							name:'After Discount',
-							value:'AFTER_DISCOUNT',
-						},
-						{
-							name:'Positive Rated Transaction',
-							value:'POSITIVE_RT',
-						},
-						{
-							name:'Positive Invoice Line',
-							value:'POSITIVE_IL',
-						},
-					],
-					default: 'BEFORE_DISCOUNT',
+				default: "",
+				displayName: "Tax Category Code",
+				name: "taxCategoryCode",
+				type: "string"
 			},
 			{
-					displayName: 'Customer Check Threshold',
-					name: 'customerCheckThreshold',
-					type: 'options',
-					options: [
-						{
-							name:'Before Discount',
-							value:'BEFORE_DISCOUNT',
-						},
-						{
-							name:'After Discount',
-							value:'AFTER_DISCOUNT',
-						},
-						{
-							name:'Positive Rated Transaction',
-							value:'POSITIVE_RT',
-						},
-						{
-							name:'Positive Invoice Line',
-							value:'POSITIVE_IL',
-						},
-					],
-					default: 'BEFORE_DISCOUNT',
+				default: "",
+				displayName: "Termination Date",
+				name: "terminationDate",
+				type: "dateTime"
 			},
 			{
-					displayName: 'Tax Category Code',
-					name: 'taxCategoryCode',
-					type: 'string',
-					default: '',
+				default: "",
+				displayName: "Termination Reason",
+				name: "terminationReason",
+				type: "string"
 			},
 			{
-					displayName: 'Threshold Per Entity',
-					name: 'thresholdPerEntity',
-					type: 'boolean',
-					default: false,
+				default: false,
+				displayName: "Threshold Per Entity",
+				name: "thresholdPerEntity",
+				type: "boolean"
 			},
 			{
-					displayName: 'Customer Account Threshold Per Entity',
-					name: 'customerAccountThresholdPerEntity',
-					type: 'boolean',
-					default: false,
+				displayName: "UA Status",
+				name: "uaStatus",
+				options: [
+					{
+						name: "Active",
+						"value": "ACTIVE"
+					},
+					{
+						name: "Canceled",
+						"value": "CANCELED"
+					},
+					{
+						name: "Closed",
+						"value": "CLOSED"
+					},
+					{
+						name: "Terminated",
+						"value": "TERMINATED"
+					}
+				],
+				default: "ACTIVE",
+				type: "options"
 			},
 			{
-					displayName: 'Customer Threshold Per Entity',
-					name: 'customerThresholdPerEntity',
-					type: 'boolean',
-					default: false,
-			},
-			{
-					displayName: 'Company',
-					name: 'company',
-					type: 'boolean',
-					default: false,
+				default: "",
+				displayName: "VAT Number",
+				name: "vatNo",
+				type: "string"
 			},
 			// End of auto generated fields
-			//Custom field DTO
-
-			{
-				displayName: 'Custom Fields',
-				name: 'customFields',
-				type: 'collection',
-				options: [
-					{
-						displayName: 'Custom Field',
-						name: 'customField',
-						type: 'collection',
-						default: {},
-						options: [
-							{
-								displayName: 'Code',
-								name: 'code',
-								type: 'string',
-								default: '',
-							},
-							{
-								displayName: 'Description',
-								name: 'description',
-								type: 'string',
-								default: '',
-							},
-							{
-								displayName: 'Field Type',
-								name: 'fieldType',
-								type: 'options',
-								options: [
-									{
-										name: 'Boolean',
-										value: 'BOOLEAN',
-									},
-									{
-										name: 'Checkbox List',
-										value: 'CHECKBOX_LIST',
-									},
-									{
-										name: 'Child Entity',
-										value: 'CHILD_ENTITY',
-									},
-									{
-										name: 'Custom Table Wrapper',
-										value: 'CUSTOM_TABLE_WRAPPER',
-									},
-									{
-										name: 'Date',
-										value: 'DATE',
-									},
-									{
-										name: 'Double',
-										value: 'DOUBLE',
-									},
-									{
-										name: 'Entity',
-										value: 'ENTITY',
-									},
-									{
-										name: 'List',
-										value: 'LIST',
-									},
-									{
-										name: 'Long',
-										value: 'LONG',
-									},
-									{
-										name: 'Multi Value',
-										value: 'MULTI_VALUE',
-									},
-									{
-										name: 'String',
-										value: 'STRING',
-									},
-									{
-										name: 'Text Area',
-										value: 'TEXT_AREA',
-									},
-								],
-								default: 'STRING',
-							},
-							{
-								displayName: 'Language Descriptions',
-								name: 'languageDescriptions',
-								type: 'collection',
-								options: [
-									{
-										displayName: 'Language Code',
-										name: 'languageCode',
-										type:'string',
-										default:'',
-									},
-									{
-										displayName: 'Description',
-										name: 'description',
-										type:'string',
-										default:'',
-									},
-								],
-								default: {},
-							},
-							{
-								displayName: 'Value Date',
-								name: 'valueDate',
-								type: 'dateTime',
-								default: '',
-							},
-							{
-								displayName: 'Value Period Start Date',
-								name: 'valuePeriodStartDate',
-								type: 'dateTime',
-								default: '',
-							},
-							{
-								displayName: 'Value Period End Date',
-								name: 'valuePeriodEndDate',
-								type: 'dateTime',
-								default: '',
-							},
-							{
-								displayName: 'Value Period Priority',
-								name: 'valuePeriodPriority',
-								type: 'boolean',
-								default: false,
-							},
-							{
-								displayName: 'String Value',
-								name: 'stringValue',
-								type: 'string',
-								default: '',
-							},
-							{
-								displayName: 'Date Value',
-								name: 'dateValue',
-								type: 'dateTime',
-								default: '',
-							},
-							{
-								displayName: 'Long Value',
-								name: 'longValue',
-								type: 'boolean',
-								default: false,
-							},
-							{
-								displayName: 'Double Value',
-								name: 'doubleValue',
-								type: 'boolean',
-								default: false,
-							},
-							{
-								displayName: 'Boolean Value',
-								name: 'booleanValue',
-								type: 'boolean',
-								default: false,
-							},
-							{
-								displayName: 'List Value',
-								name: 'listValue',
-								type: 'collection',
-								options: [
-									{
-										displayName: 'Value',
-										name: 'value',
-										type:'string',
-										default:'',
-									},
-									{
-										displayName: 'Empty',
-										name: 'empty',
-										type:'boolean',
-										default:false,
-									},
-								],
-								default: {},
-							},
-							{
-								displayName: 'Map Value',
-								name: 'mapValue',
-								type: 'collection',
-								options: [
-									{
-										displayName: 'Value',
-										name: 'value',
-										type:'string',
-										default:'',
-									},
-									{
-										displayName: 'Empty',
-										name: 'empty',
-										type:'boolean',
-										default:false,
-									},
-								],
-								default: {},
-							},
-							{
-								displayName: 'Entity Reference Value',
-								name: 'entityReferenceValue',
-								type: 'collection',
-								options: [
-									{
-										displayName: 'Class Name',
-										name: 'classname',
-										type:'string',
-										default:'',
-									},
-									{
-										displayName: 'Code',
-										name: 'code',
-										type:'string',
-										default:'',
-									},
-									{
-										displayName: 'Empty',
-										name: 'empty',
-										type:'boolean',
-										default:false,
-									},
-								],
-								default: {},
-							},
-							{
-								displayName: 'Index Type',
-								name: 'indexType',
-								type: 'options',
-								options: [
-									{
-											name: 'Store Only',
-											value: 'STORE_ONLY',
-									},
-									{
-											name: 'Index',
-											value: 'INDEX',
-									},
-									{
-											name: 'Index Not Analyze',
-											value: 'INDEX_NOT_ANALYZE',
-									},
-								],
-								default: 'STORE_ONLY',
-							},
-							{
-								displayName: 'File Value',
-								name: 'fileValue',
-								type: 'string',
-								default: '',
-							},
-							{
-								displayName: 'Formatted Value',
-								name: 'formattedValue',
-								type: 'collection',
-								options: [
-									{
-										displayName: 'ID',
-										name: 'id',
-										type:'number',
-										default:0,
-									},
-									{
-										displayName: 'Code',
-										name: 'code',
-										type:'string',
-										default:'',
-									},
-									{
-										displayName: 'Description',
-										name: 'description',
-										type:'string',
-										default:'',
-									},
-									{
-										displayName: 'Updated Code',
-										name: 'updatedCode',
-										type:'string',
-										default:'',
-									},
-									{
-										displayName: 'Single Value',
-										name: 'singleValue',
-										type:'string',
-										default:'',
-									},
-									{
-										displayName: 'List Value',
-										name: 'listValue',
-										type: 'collection',
-										options: [
-											{
-												displayName: 'Value',
-												name: 'value',
-												type:'string',
-												default:'',
-											},
-											{
-												displayName: 'Empty',
-												name: 'empty',
-												type:'boolean',
-												default:false,
-											},
-										],
-										default: {},
-									},
-									{
-										displayName: 'Map Value',
-										name: 'mapValue',
-										type: 'collection',
-										options: [
-											{
-												displayName: 'Value',
-												name: 'value',
-												type:'string',
-												default:'',
-											},
-											{
-												displayName: 'Empty',
-												name: 'empty',
-												type:'boolean',
-												default:false,
-											},
-										],
-										default: {},
-									},
-								],
-								default: {},
-							},
-							{
-								displayName: 'Gui Position',
-								name: 'guiPosition',
-								type: 'string',
-								default: '',
-							},
-							{
-								displayName: 'Custom Table Code',
-								name: 'customTableCode',
-								type: 'string',
-								default: '',
-							},
-							{
-								displayName: 'Data Filter',
-								name: 'dataFilter',
-								type: 'string',
-								default: '',
-							},
-							{
-								displayName: 'Fields',
-								name: 'fields',
-								type: 'string',
-								default: '',
-							},
-							{
-								displayName: 'Empty',
-								name: 'empty',
-								type: 'boolean',
-								default: false,
-							},
-						],
-					},
-					{
-						displayName: 'Inherited Custom Field',
-						name: 'inheritedCustomField',
-						type: 'collection',
-						default: {},
-						options: [
-							{
-								displayName: 'Code',
-								name: 'code',
-								type: 'string',
-								default: '',
-							},
-							{
-								displayName: 'Description',
-								name: 'description',
-								type: 'string',
-								default: '',
-							},
-							{
-								displayName: 'Field Type',
-								name: 'fieldType',
-								type: 'options',
-								options: [
-									{
-										name: 'Boolean',
-										value: 'BOOLEAN',
-									},
-									{
-										name: 'Checkbox List',
-										value: 'CHECKBOX_LIST',
-									},
-									{
-										name: 'Child Entity',
-										value: 'CHILD_ENTITY',
-									},
-									{
-										name: 'Custom Table Wrapper',
-										value: 'CUSTOM_TABLE_WRAPPER',
-									},
-									{
-										name: 'Date',
-										value: 'DATE',
-									},
-									{
-										name: 'Double',
-										value: 'DOUBLE',
-									},
-									{
-										name: 'Entity',
-										value: 'ENTITY',
-									},
-									{
-										name: 'List',
-										value: 'LIST',
-									},
-									{
-										name: 'Long',
-										value: 'LONG',
-									},
-									{
-										name: 'Multi Value',
-										value: 'MULTI_VALUE',
-									},
-									{
-										name: 'String',
-										value: 'STRING',
-									},
-									{
-										name: 'Text Area',
-										value: 'TEXT_AREA',
-									},
-								],
-								default: 'STRING',
-							},
-							{
-								displayName: 'Language Descriptions',
-								name: 'languageDescriptions',
-								type: 'collection',
-								options: [
-									{
-										displayName: 'Language Code',
-										name: 'languageCode',
-										type:'string',
-										default:'',
-									},
-									{
-										displayName: 'Description',
-										name: 'description',
-										type:'string',
-										default:'',
-									},
-								],
-								default: {},
-							},
-							{
-								displayName: 'Value Date',
-								name: 'valueDate',
-								type: 'dateTime',
-								default: '',
-							},
-							{
-								displayName: 'Value Period Start Date',
-								name: 'valuePeriodStartDate',
-								type: 'dateTime',
-								default: '',
-							},
-							{
-								displayName: 'Value Period End Date',
-								name: 'valuePeriodEndDate',
-								type: 'dateTime',
-								default: '',
-							},
-							{
-								displayName: 'Value Period Priority',
-								name: 'valuePeriodPriority',
-								type: 'boolean',
-								default: false,
-							},
-							{
-								displayName: 'String Value',
-								name: 'stringValue',
-								type: 'string',
-								default: '',
-							},
-							{
-								displayName: 'Date Value',
-								name: 'dateValue',
-								type: 'dateTime',
-								default: '',
-							},
-							{
-								displayName: 'Long Value',
-								name: 'longValue',
-								type: 'boolean',
-								default: false,
-							},
-							{
-								displayName: 'Double Value',
-								name: 'doubleValue',
-								type: 'boolean',
-								default: false,
-							},
-							{
-								displayName: 'Boolean Value',
-								name: 'booleanValue',
-								type: 'boolean',
-								default: false,
-							},
-							{
-								displayName: 'List Value',
-								name: 'listValue',
-								type: 'collection',
-								options: [
-									{
-										displayName: 'Value',
-										name: 'value',
-										type:'string',
-										default:'',
-									},
-									{
-										displayName: 'Empty',
-										name: 'empty',
-										type:'boolean',
-										default:false,
-									},
-								],
-								default: {},
-							},
-							{
-								displayName: 'Map Value',
-								name: 'mapValue',
-								type: 'collection',
-								options: [
-									{
-										displayName: 'Value',
-										name: 'value',
-										type:'string',
-										default:'',
-									},
-									{
-										displayName: 'Empty',
-										name: 'empty',
-										type:'boolean',
-										default:false,
-									},
-								],
-								default: {},
-							},
-							{
-								displayName: 'Entity Reference Value',
-								name: 'entityReferenceValue',
-								type: 'collection',
-								options: [
-									{
-										displayName: 'Class Name',
-										name: 'classname',
-										type:'string',
-										default:'',
-									},
-									{
-										displayName: 'Code',
-										name: 'code',
-										type:'string',
-										default:'',
-									},
-									{
-										displayName: 'Empty',
-										name: 'empty',
-										type:'boolean',
-										default:false,
-									},
-								],
-								default: {},
-							},
-							{
-								displayName: 'Index Type',
-								name: 'indexType',
-								type: 'options',
-								options: [
-									{
-											name: 'Store Only',
-											value: 'STORE_ONLY',
-									},
-									{
-											name: 'Index',
-											value: 'INDEX',
-									},
-									{
-											name: 'Index Not Analyze',
-											value: 'INDEX_NOT_ANALYZE',
-									},
-								],
-								default: 'STORE_ONLY',
-							},
-							{
-								displayName: 'File Value',
-								name: 'fileValue',
-								type: 'string',
-								default: '',
-							},
-							{
-								displayName: 'Formatted Value',
-								name: 'formattedValue',
-								type: 'collection',
-								options: [
-									{
-										displayName: 'ID',
-										name: 'id',
-										type:'number',
-										default:0,
-									},
-									{
-										displayName: 'Code',
-										name: 'code',
-										type:'string',
-										default:'',
-									},
-									{
-										displayName: 'Description',
-										name: 'description',
-										type:'string',
-										default:'',
-									},
-									{
-										displayName: 'Updated Code',
-										name: 'updatedCode',
-										type:'string',
-										default:'',
-									},
-									{
-										displayName: 'Single Value',
-										name: 'singleValue',
-										type:'string',
-										default:'',
-									},
-									{
-										displayName: 'List Value',
-										name: 'listValue',
-										type: 'collection',
-										options: [
-											{
-												displayName: 'Value',
-												name: 'value',
-												type:'string',
-												default:'',
-											},
-											{
-												displayName: 'Empty',
-												name: 'empty',
-												type:'boolean',
-												default:false,
-											},
-										],
-										default: {},
-									},
-									{
-										displayName: 'Map Value',
-										name: 'mapValue',
-										type: 'collection',
-										options: [
-											{
-												displayName: 'Value',
-												name: 'value',
-												type:'string',
-												default:'',
-											},
-											{
-												displayName: 'Empty',
-												name: 'empty',
-												type:'boolean',
-												default:false,
-											},
-										],
-										default: {},
-									},
-								],
-								default: {},
-							},
-							{
-								displayName: 'Gui Position',
-								name: 'guiPosition',
-								type: 'string',
-								default: '',
-							},
-							{
-								displayName: 'Custom Table Code',
-								name: 'customTableCode',
-								type: 'string',
-								default: '',
-							},
-							{
-								displayName: 'Data Filter',
-								name: 'dataFilter',
-								type: 'string',
-								default: '',
-							},
-							{
-								displayName: 'Fields',
-								name: 'fields',
-								type: 'string',
-								default: '',
-							},
-							{
-								displayName: 'Empty',
-								name: 'empty',
-								type: 'boolean',
-								default: false,
-							},
-						],
-					},
-					{
-						displayName: 'Empty',
-						name: 'empty',
-						type: 'boolean',
-						default: false,
-					},
-				],
-				default: {},
-			},
 		],
 	},
 ];
