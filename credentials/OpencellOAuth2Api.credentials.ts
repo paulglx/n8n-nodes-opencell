@@ -10,7 +10,6 @@ export class OpencellOAuth2Api implements ICredentialType {
 		'oAuth2Api',
 	];
 	displayName = 'Opencell OAuth2 API';
-	documentationUrl = 'opencell';
 	properties: INodeProperties[] = [
 		{
 			displayName: 'Host',

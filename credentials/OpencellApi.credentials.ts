@@ -6,7 +6,6 @@ import {
 export class OpencellApi implements ICredentialType {
 	name = 'opencellApi';
 	displayName = 'Opencell API';
-	documentationUrl = 'opencell';
 	properties: INodeProperties[] = [
 		{
 			displayName: 'Host',
