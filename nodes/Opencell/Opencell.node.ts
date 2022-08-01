@@ -376,7 +376,7 @@ export class Opencell implements INodeType {
 			try {
 				// Add credentials if any are set
 				// here we use basic auth
-				else if (resource === 'customerHierarchy') {
+				if (resource === 'customerHierarchy') {
 					if (operation === 'upsert') {
 
 						const url = `/opencell/api/rest/account/accountHierarchy/createOrUpdateCRMAccountHierarchy`;
