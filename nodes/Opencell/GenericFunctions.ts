@@ -26,7 +26,7 @@ import {
 	NodeApiError
 } from 'n8n-workflow';
 
-export async function opencellApi(this: IHookFunctions | IWebhookFunctions | IExecuteFunctions | IExecuteSingleFunctions | ILoadOptionsFunctions, method: IHttpRequestMethods, endpoint: string, body: any = {}, query: IDataObject = {}, uri?: string): Promise<any> { // tslint:disable-line:no-any
+export async function opencellApi(this: IHookFunctions | IWebhookFunctions | IExecuteFunctions | IExecuteSingleFunctions | ILoadOptionsFunctions, method: IHttpRequestMethods, endpoint: string, body: any = {}, query: IDataObject = {}): Promise<any> { // tslint:disable-line:no-any
 
 	const returnData: IDataObject[] = [];
 
@@ -75,8 +75,25 @@ export async function opencellApi(this: IHookFunctions | IWebhookFunctions | IEx
 		}
 		throw error;
 	}
+}
 
+export async function opencellApiRequestAll(this: IHookFunctions | IExecuteFunctions | ILoadOptionsFunctions, method: IHttpRequestMethods, endpoint: string, body: any = {}, query: IDataObject = {}): Promise<any> { // tslint:disable-line:no-any
+	const returnData : IDataObject[] = [];
+	let responseData;
+	let total;
+	let requestedValues = 0;
 
+	body.limit = 5;
+
+	do {
+		responseData = await opencellApi.call(this, method, endpoint, body, query);
+		total = responseData.total;
+		requestedValues += body.limit;
+		console.log("total:",total,"requested values:",requestedValues);
+		returnData.push.apply(returnData, responseData);
+	} while(requestedValues < total);
+
+	return returnData;
 }
 
 export async function validateCredentials(this: ICredentialTestFunctions ,decryptedCredentials: ICredentialDataDecryptedObject): Promise<INodeCredentialTestResult> {

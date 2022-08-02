@@ -517,22 +517,22 @@ export const customerHierarchyFields: INodeProperties[] = [
 				options: [
 					{
 						name: "Active",
-						"value": "ACTIVE"
+						value: "ACTIVE",
 					},
 					{
 						name: "Canceled",
-						"value": "CANCELED"
+						value: "CANCELED",
 					},
 					{
 						name: "Closed",
-						"value": "CLOSED"
+						value: "CLOSED",
 					},
 					{
 						name: "Terminated",
-						"value": "TERMINATED"
-					}
+						value: "TERMINATED",
+					},
 				],
-				type: "options"
+				type: "options",
 			},
 			{
 				default: {},
@@ -543,88 +543,88 @@ export const customerHierarchyFields: INodeProperties[] = [
 						default: "",
 						displayName: "Account Number",
 						name: "accountNumber",
-						type: "string"
+						type: "string",
 					},
 					{
 						default: "",
 						displayName: "Account Owner",
 						name: "accountOwner",
-						type: "string"
+						type: "string",
 					},
 					{
 						default: "",
 						displayName: "BIC",
 						name: "bic",
-						type: "string"
+						type: "string",
 					},
 					{
 						default: "",
 						displayName: "Bank Code",
 						name: "bankCode",
-						type: "string"
+						type: "string",
 					},
 					{
 						default: "",
 						displayName: "Bank ID",
 						name: "bankId",
-						type: "string"
+						type: "string",
 					},
 					{
 						default: "",
 						displayName: "Bank Name",
 						name: "bankName",
-						type: "string"
+						type: "string",
 					},
 					{
 						default: "",
 						displayName: "Branch Code",
 						name: "branchCode",
-						type: "string"
+						type: "string",
 					},
 					{
 						default: "",
 						displayName: "IBAN",
 						name: "iban",
-						type: "string"
+						type: "string",
 					},
 					{
 						default: "",
 						displayName: "ICS",
 						name: "ics",
-						type: "string"
+						type: "string",
 					},
 					{
 						default: "",
 						displayName: "Issuer Name",
 						name: "issuerName",
-						type: "string"
+						type: "string",
 					},
 					{
 						default: "",
 						displayName: "Issuer Number",
 						name: "issuerNumber",
-						type: "string"
+						type: "string",
 					},
 					{
 						default: "",
 						displayName: "Key",
 						name: "key",
-						type: "string"
+						type: "string",
 					},
 					{
 						default: false,
 						displayName: "Empty",
 						name: "empty",
-						type: "boolean"
-					}
+						type: "boolean",
+					},
 				],
-				type: "collection"
+				type: "collection",
 			},
 			{
 				default: "",
 				displayName: "Billing Cycle",
 				name: "billingCycle",
-				type: "string"
+				type: "string",
 			},
 			{
 				default: "ACTIVE",
@@ -633,20 +633,20 @@ export const customerHierarchyFields: INodeProperties[] = [
 				options: [
 					{
 						name: "Active",
-						"value": "ACTIVE"
+						value: "ACTIVE",
 					},
 					{
 						name: "Close",
-						"value": "CLOSE"
-					}
+						value: "CLOSE",
+					},
 				],
-				type: "options"
+				type: "options",
 			},
 			{
 				default: "",
 				displayName: "CCED Emails",
 				name: "ccedEmails",
-				type: "string"
+				type: "string",
 			},
 			{
 				default: "BEFORE_DISCOUNT",
@@ -655,22 +655,22 @@ export const customerHierarchyFields: INodeProperties[] = [
 				options: [
 					{
 						name: "After Discount",
-						"value": "AFTER_DISCOUNT"
+						value: "AFTER_DISCOUNT",
 					},
 					{
 						name: "Before Discount",
-						"value": "BEFORE_DISCOUNT"
+						value: "BEFORE_DISCOUNT",
 					},
 					{
 						name: "Positive Invoice Line",
-						"value": "POSITIVE_IL"
+						value: "POSITIVE_IL",
 					},
 					{
 						name: "Positive Rated Transaction",
-						"value": "POSITIVE_RT"
-					}
+						value: "POSITIVE_RT",
+					},
 				],
-				type: "options"
+				type: "options",
 			},
 			{
 				default: "BEFORE_DISCOUNT",
@@ -679,22 +679,22 @@ export const customerHierarchyFields: INodeProperties[] = [
 				options: [
 					{
 						name: "After Discount",
-						"value": "AFTER_DISCOUNT"
+						value: "AFTER_DISCOUNT",
 					},
 					{
 						name: "Before Discount",
-						"value": "BEFORE_DISCOUNT"
+						value: "BEFORE_DISCOUNT",
 					},
 					{
 						name: "Positive Invoice Line",
-						"value": "POSITIVE_IL"
+						value: "POSITIVE_IL",
 					},
 					{
 						name: "Positive Rated Transaction",
-						"value": "POSITIVE_RT"
-					}
+						value: "POSITIVE_RT",
+					},
 				],
-				type: "options"
+				type: "options",
 			},
 			{
 				default: "BEFORE_DISCOUNT",
@@ -703,82 +703,82 @@ export const customerHierarchyFields: INodeProperties[] = [
 				options: [
 					{
 						name: "After Discount",
-						"value": "AFTER_DISCOUNT"
+						value: "AFTER_DISCOUNT",
 					},
 					{
 						name: "Before Discount",
-						"value": "BEFORE_DISCOUNT"
+						value: "BEFORE_DISCOUNT",
 					},
 					{
 						name: "Positive Invoice Line",
-						"value": "POSITIVE_IL"
+						value: "POSITIVE_IL",
 					},
 					{
 						name: "Positive Rated Transaction",
-						"value": "POSITIVE_RT"
-					}
+						value: "POSITIVE_RT",
+					},
 				],
-				type: "options"
+				type: "options",
 			},
 			{
 				default: false,
 				displayName: "Company",
 				name: "company",
-				type: "boolean"
+				type: "boolean",
 			},
 			{
 				default: 0,
 				displayName: "Customer Account Invoicing Threshold",
 				name: "customerAccountInvoicingThreshold",
-				type: "number"
+				type: "number",
 			},
 			{
 				default: false,
 				displayName: "Customer Account Threshold Per Entity",
 				name: "customerAccountThresholdPerEntity",
-				type: "boolean"
+				type: "boolean",
 			},
 			{
 				default: 0,
 				displayName: "Customer Invoicing Threshold",
 				name: "customerInvoicingThreshold",
-				type: "number"
+				type: "number",
 			},
 			{
 				default: "",
 				displayName: "Credit Category",
 				name: "creditCategory",
-				type: "string"
+				type: "string",
 			},
 			{
 				default: "",
 				displayName: "Customer Brand",
 				name: "customerBrand",
-				type: "string"
+				type: "string",
 			},
 			{
 				default: false,
 				displayName: "Customer Threshold Per Entity",
 				name: "customerThresholdPerEntity",
-				type: "boolean"
+				type: "boolean",
 			},
 			{
 				default: "",
 				displayName: "Date Dunning Level",
 				name: "dateDunningLevel",
-				type: "dateTime"
+				type: "dateTime",
 			},
 			{
 				default: "",
 				displayName: "Date Status",
 				name: "dateStatus",
-				type: "dateTime"
+				type: "dateTime",
 			},
 			{
 				default: "",
 				displayName: "Description",
 				name: "description",
-				type: "string"
+				type: "string",
 			},
 			{
 				displayName: "Dunning Level",
@@ -786,32 +786,32 @@ export const customerHierarchyFields: INodeProperties[] = [
 				options: [
 					{
 						name: "0",
-						"value": "R0"
+						value: "R0",
 					},
 					{
 						name: "1",
-						"value": "R1"
+						value: "R1",
 					},
 					{
 						name: "2",
-						"value": "R2"
+						value: "R2",
 					},
 					{
 						name: "3",
-						"value": "R3"
+						value: "R3",
 					},
 					{
 						name: "4",
-						"value": "R4"
+						value: "R4",
 					},
 					{
 						name: "5",
-						"value": "R5"
+						value: "R5",
 					},
 					{
 						name: "6",
-						"value": "R6"
-					}
+						value: "R6",
+					},
 				],
 				type: "options",
 				default: "R0",
@@ -820,55 +820,55 @@ export const customerHierarchyFields: INodeProperties[] = [
 				default: false,
 				displayName: "Electronic Billing",
 				name: "electronicBilling",
-				type: "boolean"
+				type: "boolean",
 			},
 			{
 				default: "",
 				displayName: "Email Template",
 				name: "emailTemplate",
-				type: "string"
+				type: "string",
 			},
 			{
 				default: "",
 				displayName: "External Reference 1",
 				name: "externalRef1",
-				type: "string"
+				type: "string",
 			},
 			{
 				default: "",
 				displayName: "External Reference 2",
 				name: "externalRef2",
-				type: "string"
+				type: "string",
 			},
 			{
 				default: 0,
 				displayName: "Invoicing Threshold",
 				name: "invoicingThreshold",
-				type: "number"
+				type: "number",
 			},
 			{
 				default: "",
 				displayName: "Job Title",
 				name: "jobTitle",
-				type: "string"
+				type: "string",
 			},
 			{
 				default: "",
 				displayName: "Mailing Type",
 				name: "mailingType",
-				type: "string"
+				type: "string",
 			},
 			{
 				default: "",
 				displayName: "Mandate Date",
 				name: "mandateDate",
-				type: "dateTime"
+				type: "dateTime",
 			},
 			{
 				default: "",
 				displayName: "Mandate Identification",
 				name: "mandateIdentification",
-				type: "string"
+				type: "string",
 			},
 			{
 				default: {},
@@ -879,142 +879,142 @@ export const customerHierarchyFields: INodeProperties[] = [
 						default: "",
 						displayName: "Billing Account Minimum Amount",
 						name: "billingAccountMinimumAmountEl",
-						type: "string"
+						type: "string",
 					},
 					{
 						default: "",
 						displayName: "Billing Account Minimum Charge Template",
 						name: "billingAccountMinimumChargeTemplate",
-						type: "string"
+						type: "string",
 					},
 					{
 						default: "",
 						displayName: "Billing Account Minimum Label",
 						name: "billingAccountMinimumLabelEl",
-						type: "string"
+						type: "string",
 					},
 					{
 						default: "",
 						displayName: "Customer Account Minimum Amount",
 						name: "customerAccountMinimumAmountEl",
-						type: "string"
+						type: "string",
 					},
 					{
 						default: "",
 						displayName: "Customer Account Minimum Charge Template",
 						name: "customerAccountMinimumChargeTemplate",
-						type: "string"
+						type: "string",
 					},
 					{
 						default: "",
 						displayName: "Customer Account Minimum Label",
 						name: "customerAccountMinimumLabelEl",
-						type: "string"
+						type: "string",
 					},
 					{
 						default: "",
 						displayName: "Customer Account Minimum Target Account",
 						name: "customerAccountMinimumTargetAccount",
-						type: "string"
+						type: "string",
 					},
 					{
 						default: "",
 						displayName: "Customer Minimum Amount",
 						name: "customerMinimumAmountEl",
-						type: "string"
+						type: "string",
 					},
 					{
 						default: "",
 						displayName: "Customer Minimum Charge Template",
 						name: "customerMinimumChargeTemplate",
-						type: "string"
+						type: "string",
 					},
 					{
 						default: "",
 						displayName: "Customer Minimum Label",
 						name: "customerMinimumLabelEl",
-						type: "string"
+						type: "string",
 					},
 					{
 						default: "",
 						displayName: "Customer Minimum Target Account",
 						name: "customerMinimumTargetAccount",
-						type: "string"
+						type: "string",
 					},
 					{
 						default: "",
 						displayName: "User Account Minimum Amount",
 						name: "userAccountMinimumAmountEl",
-						type: "string"
+						type: "string",
 					},
 					{
 						default: "",
 						displayName: "User Account Minimum Charge Template",
 						name: "userAccountMinimumChargeTemplate",
-						type: "string"
+						type: "string",
 					},
 					{
 						default: "",
 						displayName: "User Account Minimum Label",
 						name: "userAccountMinimumLabelEl",
-						type: "string"
-					}
+						type: "string",
+					},
 				],
-				type: "collection"
+				type: "collection",
 			},
 			{
 				default: "",
 				displayName: "Next Invoice Date",
 				name: "nextInvoiceDate",
-				type: "dateTime"
+				type: "dateTime",
 			},
 			{
 				default: "",
 				displayName: "Payment Terms",
 				name: "paymentTerms",
-				type: "string"
+				type: "string",
 			},
 			{
 				default: "",
 				displayName: "Registration Number",
 				name: "registrationNo",
-				type: "string"
+				type: "string",
 			},
 			{
 				default: "",
 				displayName: "Seller",
 				name: "seller",
-				type: "string"
+				type: "string",
 			},
 			{
 				default: "",
 				displayName: "Subscription Date",
 				name: "subscriptionDate",
-				type: "dateTime"
+				type: "dateTime",
 			},
 			{
 				default: "",
 				displayName: "Tax Category Code",
 				name: "taxCategoryCode",
-				type: "string"
+				type: "string",
 			},
 			{
 				default: "",
 				displayName: "Termination Date",
 				name: "terminationDate",
-				type: "dateTime"
+				type: "dateTime",
 			},
 			{
 				default: "",
 				displayName: "Termination Reason",
 				name: "terminationReason",
-				type: "string"
+				type: "string",
 			},
 			{
 				default: false,
 				displayName: "Threshold Per Entity",
 				name: "thresholdPerEntity",
-				type: "boolean"
+				type: "boolean",
 			},
 			{
 				displayName: "UA Status",
@@ -1022,29 +1022,29 @@ export const customerHierarchyFields: INodeProperties[] = [
 				options: [
 					{
 						name: "Active",
-						"value": "ACTIVE"
+						value: "ACTIVE",
 					},
 					{
 						name: "Canceled",
-						"value": "CANCELED"
+						value: "CANCELED",
 					},
 					{
 						name: "Closed",
-						"value": "CLOSED"
+						value: "CLOSED",
 					},
 					{
 						name: "Terminated",
-						"value": "TERMINATED"
-					}
+						value: "TERMINATED",
+					},
 				],
 				default: "ACTIVE",
-				type: "options"
+				type: "options",
 			},
 			{
 				default: "",
 				displayName: "VAT Number",
 				name: "vatNo",
-				type: "string"
+				type: "string",
 			},
 			// End of auto generated fields
 		],
