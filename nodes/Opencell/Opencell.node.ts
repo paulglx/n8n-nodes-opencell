@@ -20,8 +20,10 @@ import {
 } from 'n8n-workflow';
 
 import {
+	convertCustomFields,
 	opencellApi,
-	opencellApiRequestAll,
+	//opencellApiRequestAll,
+	validateCredentials,
 } from './GenericFunctions';
 
 import {
@@ -42,27 +44,6 @@ import {
 import {
 	customFields
 } from './CustomFieldsDescription';
-
-async function validateCredentials(this: ICredentialTestFunctions ,decryptedCredentials: ICredentialDataDecryptedObject): Promise<INodeCredentialTestResult> {
-
-	const credentials = decryptedCredentials;
-	const requestOptions: IHttpRequestOptions = {
-		method: 'GET',
-		headers: {Accept: 'application/json',},
-		url: '',
-		json: true,
-	};
-
-	requestOptions.auth = {
-		username: credentials.username as string,
-		password: credentials.password as string,
-	};
-	requestOptions.url = `${credentials.host}:${credentials.port}`;
-	requestOptions.url += '/opencell/api/rest/catalog/version';
-	requestOptions.method = 'GET';
-
-	return await this.helpers.request(requestOptions);
-}
 export class Opencell implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Opencell',
@@ -542,73 +523,10 @@ export class Opencell implements INodeType {
 						const customFieldsToSend:IDataObject[] = [];
 
 						if(customFieldsValues) {
-							for(const cf of customFieldsValues) {
-
-								const currentCf:IDataObject = {
-									code:cf.code,
-									fieldType: cf.fieldType,
-								};
-
-								switch(String(cf.fieldType)) {
-
-									case 'LIST':
-									case 'CHECKBOX_LIST':
-										//convert list values to the format expected by the api aka "value":[{"value":"VAL1"},{"value":"VAL2"}]
-										const valueField = cf.value as string[];
-										if(valueField && valueField.toString() !== '') {
-											//Multiple values case
-											if(Array.isArray(valueField)) {
-												const valueList:IDataObject[] = [];
-												for(const value of valueField) {
-													valueList.push({
-														'value':value,
-													});
-												}
-												currentCf.value = valueList;
-											}
-											//Single values case
-											else {
-												const value = cf.value;
-												currentCf.value = [{
-													'value':value,
-												}];
-											}
-										}
-										break;
-
-									case 'STRING':
-									case 'TEXT_AREA':
-										currentCf.stringValue = cf.stringValue;
-										break;
-									case 'DATE':
-										currentCf.dateValue = cf.dateValue;
-										break;
-									case 'BOOLEAN':
-										currentCf.booleanValue = cf.booleanValue;
-										break;
-									case 'LONG':
-										currentCf.longValue = cf.longValue;
-										break;
-									case 'DOUBLE':
-										currentCf.doubleValue = cf.doubleValue;
-										break;
-									default:
-										throw new NodeApiError(this.getNode(), {error: `Custom field type unsupported: ${cf.type}`});
-								}
-
-								if(cf.code) {
-									//Remove everything after | in 'code'
-									currentCf.code = String(cf.code).split('|')[0];
-								}
-
-								customFieldsToSend.push(currentCf);
-
-							}
+							body.customFields = {
+								'customField':convertCustomFields(this, customFieldsValues),
+							};
 						}
-
-						body.customFields = {
-							'customField':customFieldsToSend,
-						};
 
 						responseData = await opencellApi.call(this, 'POST', url, body);
 						returnData.push({
@@ -666,76 +584,12 @@ export class Opencell implements INodeType {
 						const customFieldsValues = customFields.customFieldsValues as IDataObject[];
 
 						//Not all fields should be sent to the api. Only the relevant ones.
-						const customFieldsToSend:IDataObject[] = [];
-
 						if(customFieldsValues) {
-							for(const cf of customFieldsValues) {
-
-								const currentCf:IDataObject = {
-									code:cf.code,
-									fieldType: cf.fieldType,
-								};
-
-								switch(String(cf.fieldType)) {
-
-									case 'LIST':
-									case 'CHECKBOX_LIST':
-										//convert list values to the format expected by the api aka "value":[{"value":"VAL1"},{"value":"VAL2"}]
-										const valueField = cf.value as string[];
-										if(valueField && valueField.toString() !== '') {
-											//Multiple values case
-											if(Array.isArray(valueField)) {
-												const valueList:IDataObject[] = [];
-												for(const value of valueField) {
-													valueList.push({
-														'value':value,
-													});
-												}
-												currentCf.value = valueList;
-											}
-											//Single values case
-											else {
-												const value = cf.value;
-												currentCf.value = [{
-													'value':value,
-												}];
-											}
-										}
-										break;
-
-									case 'STRING':
-									case 'TEXT_AREA':
-										currentCf.stringValue = cf.stringValue;
-										break;
-									case 'DATE':
-										currentCf.dateValue = cf.dateValue;
-										break;
-									case 'BOOLEAN':
-										currentCf.booleanValue = cf.booleanValue;
-										break;
-									case 'LONG':
-										currentCf.longValue = cf.longValue;
-										break;
-									case 'DOUBLE':
-										currentCf.doubleValue = cf.doubleValue;
-										break;
-									default:
-										throw new NodeApiError(this.getNode(), {error: `Custom field type unsupported: ${cf.type}`});
-								}
-
-								if(cf.code) {
-									//Remove everything after | in 'code'
-									currentCf.code = String(cf.code).split('|')[0];
-								}
-
-								customFieldsToSend.push(currentCf);
-
-							}
+							body.customFields = {
+								'customField':convertCustomFields(this, customFieldsValues),
+							};
 						}
 
-						body.customFields = {
-							'customField':customFieldsToSend,
-						};
 					}
 
 					responseData = await opencellApi.call(this, verb, url, body);
@@ -781,6 +635,7 @@ export class Opencell implements INodeType {
 					}
 
 					else if (operation === 'getAll') {
+						/*
 						const entity = this.getNodeParameter('entity', i) as string;
 						const url = `/opencell/api/rest/v2/generic/all/${entity}`;
 
@@ -792,6 +647,7 @@ export class Opencell implements INodeType {
 							json:responseData,
 							pairedItem: {item:i},
 						});
+						*/
 					}
 
 					else if (operation === 'search') {
