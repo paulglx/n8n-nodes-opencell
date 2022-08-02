@@ -9,10 +9,19 @@ import {
 } from 'n8n-core';
 
 import {
+	ICredentialDataDecryptedObject,
+	ICredentialsDecrypted,
+	ICredentialTestFunctions,
 	IDataObject,
 	IHookFunctions,
 	IHttpRequestMethods,
 	IHttpRequestOptions,
+	INode,
+	INodeCredentialTestResult,
+	INodeExecutionData,
+	INodePropertyOptions,
+	INodeType,
+	INodeTypeDescription,
 	IWebhookFunctions,
 	NodeApiError
 } from 'n8n-workflow';
@@ -68,4 +77,25 @@ export async function opencellApi(this: IHookFunctions | IWebhookFunctions | IEx
 	}
 
 
+}
+
+export async function validateCredentials(this: ICredentialTestFunctions ,decryptedCredentials: ICredentialDataDecryptedObject): Promise<INodeCredentialTestResult> {
+
+	const credentials = decryptedCredentials;
+	const requestOptions: IHttpRequestOptions = {
+		method: 'GET',
+		headers: {Accept: 'application/json',},
+		url: '',
+		json: true,
+	};
+
+	requestOptions.auth = {
+		username: credentials.username as string,
+		password: credentials.password as string,
+	};
+	requestOptions.url = `${credentials.host}:${credentials.port}`;
+	requestOptions.url += '/opencell/api/rest/catalog/version';
+	requestOptions.method = 'GET';
+
+	return await this.helpers.request(requestOptions);
 }
